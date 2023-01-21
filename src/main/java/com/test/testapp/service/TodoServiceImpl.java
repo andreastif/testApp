@@ -29,7 +29,7 @@ public class TodoServiceImpl implements TodoService{
     }
 
     @Override
-    public Todo add(Todo todo) {
-        return null;
+    public Todo add(String addTodoDescription) {
+        return todoRepository.save(new Todo (addTodoDescription));
     }
 }
