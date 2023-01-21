@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface TodoService {
 
-    Optional<List<Todo>> findAll();
+    List<Todo> findAll();
     Optional<Todo> findById(Long id);
     Todo add(String addTodoDescription);
 

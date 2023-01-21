@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,26 +24,23 @@ public class TodoController {
     //Vad skall denna skrivas om till om datat man returnerar är tomt?
     @GetMapping
     public ResponseEntity<List<Todo>> findAll() {
-        Optional<List<Todo>> allTodos = todoService.findAll();
-        if (allTodos.isPresent()) {
-            return new ResponseEntity<>(allTodos.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        List<Todo> allTodos = todoService.findAll();
+        return new ResponseEntity<>(allTodos, HttpStatus.OK);
+
     }
 
-    @GetMapping ("{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Todo> findById(@PathVariable Long id) { //PathVariable nyar upp Path för IDt. T.ex id  '1337' -> localhost:8080/api/todo/1337
         Optional<Todo> todo = todoService.findById(id);
         if (todo.isPresent()) {
             return new ResponseEntity<>(todo.get(), HttpStatus.OK);
         }
-//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND); //vad är bäst?
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     //Post (skapa) localhost:8080/api/todo, test m Postman OK (ej swagger)
     @PostMapping
-    public ResponseEntity<Todo> addTodo (@RequestBody String addTodoDescription) {
+    public ResponseEntity<Todo> addTodo(@RequestBody String addTodoDescription) {
         return new ResponseEntity<>(todoService.add(addTodoDescription), HttpStatus.CREATED);
     }
 

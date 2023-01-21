@@ -19,8 +19,8 @@ public class TodoServiceImpl implements TodoService{
     }
 
     @Override
-    public Optional<List<Todo>> findAll() {
-        return Optional.of(todoRepository.findAll());
+    public List<Todo> findAll() {
+        return todoRepository.findAll();
     }
 
     @Override
