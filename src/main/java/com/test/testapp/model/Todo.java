@@ -8,24 +8,31 @@ import java.util.Objects;
 public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private Long id;
     @Column(nullable = false)
     private String description;
-    @Column(nullable = false)
+
     private LocalDate created;
-    @Column(nullable = false)
     private LocalDate lastUpdated;
 
-    protected Todo() {
+
+    //Todo: Undersök varför det blir såhär. Varför använder dataseed en constructor och API:n via Postman en annan?
+    //No args constructorn behöver localdate för att kunna populera via API:n.
+    public Todo() {
+        this.created = LocalDate.now();
+        this.lastUpdated = LocalDate.now();
     }
 
+    //Args constructorn behöver localdate för att kunna populera via dataseed.
     public Todo(String description) {
         this.description = description;
         this.created = LocalDate.now();
         this.lastUpdated = LocalDate.now();
     }
 
+    public void setLastUpdated(LocalDate lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
     public void setDescription(String description) {
         this.description = description;
     }

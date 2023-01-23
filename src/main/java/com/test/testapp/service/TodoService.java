@@ -9,6 +9,7 @@ public interface TodoService {
 
     List<Todo> findAll();
     Optional<Todo> findById(Long id);
-    Todo add(String addTodoDescription);
-
+    Todo add(Todo newTodo);
+    Todo update(Todo updateTodo);
+    void deleteById(Long id);
 }

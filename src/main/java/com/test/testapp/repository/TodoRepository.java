@@ -12,7 +12,10 @@ What Spring data jpa provides is
 - A Repository interface to auto generate most boilerplate query pattern.
  */
 
-public interface TodoRepository extends JpaRepository<Todo, Long> { // <Class, Datatyp>
+public interface TodoRepository extends JpaRepository<Todo, Long> {
+
+    // <Class, Datatyp>
     // Interfacet + extends gör att man får alla CRUD metoder gratis (man kan define egna också)
+
     List<Todo> findTodoByCreated(LocalDate created);
 }

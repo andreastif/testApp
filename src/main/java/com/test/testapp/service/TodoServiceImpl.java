@@ -5,6 +5,7 @@ import com.test.testapp.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,18 @@ public class TodoServiceImpl implements TodoService{
     }
 
     @Override
-    public Todo add(String addTodoDescription) {
-        return todoRepository.save(new Todo (addTodoDescription));
+    public Todo add(Todo newTodo) {
+        return todoRepository.save(newTodo);
+    }
+
+    @Override
+    public Todo update(Todo updateTodo) {
+        updateTodo.setLastUpdated(LocalDate.now());
+        return todoRepository.save(updateTodo);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        todoRepository.deleteById(id);
     }
 }

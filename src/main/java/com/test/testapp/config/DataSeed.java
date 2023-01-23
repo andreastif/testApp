@@ -22,19 +22,19 @@ import java.util.List;
 @Configuration
 public class DataSeed {
 
-//    @Bean
-//    CommandLineRunner initDatabase(TodoRepository repository) {
-//        return args -> {
-//            List<Todo> preDefinedTodosList = List.of(
-//                    new Todo("Buy milk"),
-//                    new Todo("Buy newspaper"),
-//                    new Todo("Buy candy"),
-//                    new Todo("Buy donuts"),
-//                    new Todo("Buy coffee")
-//            );
-//
-//            repository.saveAll(preDefinedTodosList);
-//        };
-//    }
+    @Bean
+    CommandLineRunner initDatabase(TodoRepository repository) {
+        return args -> {
+            List<Todo> preDefinedTodosList = List.of(
+                    new Todo("Buy milk"),
+                    new Todo("Buy newspaper"),
+                    new Todo("Buy candy"),
+                    new Todo("Buy donuts"),
+                    new Todo("Buy coffee")
+            );
+
+            repository.saveAll(preDefinedTodosList);
+        };
+    }
 
 }

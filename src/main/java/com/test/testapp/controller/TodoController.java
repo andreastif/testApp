@@ -40,9 +40,28 @@ public class TodoController {
 
     //Post (skapa) localhost:8080/api/todo, test m Postman OK (ej swagger)
     @PostMapping
-    public ResponseEntity<Todo> addTodo(@RequestBody String addTodoDescription) {
-        return new ResponseEntity<>(todoService.add(addTodoDescription), HttpStatus.CREATED);
+    public ResponseEntity<Todo> addTodo(@RequestBody Todo newTodo) {
+        return new ResponseEntity<>(todoService.add(newTodo), HttpStatus.CREATED);
     }
 
+    //LETAR EFTER ID SOM MATCHAR DET SOM SKICKADES IN, DÅ UPPDATERAR DEN OBJEKTET (ANNARS SKAPAR DEN EN NY OM DET INTE FINNS)
+    @PutMapping
+    public ResponseEntity<Todo> updateTodo(@RequestBody Todo updateTodo) {
+        return new ResponseEntity<>(todoService.update(updateTodo), HttpStatus.OK);
+    }
+
+
+    //med eller utan response entity?
+    @DeleteMapping("{id}")
+    public void deleteTodo(@PathVariable Long id) {
+        todoService.deleteById(id);
+    }
+
+    //test/ för att ha två delete mappings
+    @DeleteMapping("test/{id}")
+    public ResponseEntity<Void> deleteTodoTest(@PathVariable Long id) {
+        todoService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
